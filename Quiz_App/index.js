@@ -63,8 +63,7 @@ loadQuiz();
  * ? load the question on radio
  */
 function loadQuiz() {
-
-    deselect();
+    selectAnswer = undefined;
     questionEl.innerHTML = data[current_question].question;
     a_text.innerHTML = data[current_question].a;
     b_text.innerHTML = data[current_question].b;
@@ -78,11 +77,10 @@ function loadQuiz() {
  */
 function deselect() {
     answers.forEach((answer) => {
-        if (answer.checked) {
-            answer.checked = false;
-        }
-    });
+        answer.checked = false;
+    });   
 }
+
 
 /**
  * ? verify that in all radio there's one that's checked
@@ -100,12 +98,13 @@ function getSelectedRadio() {
     return selectAnswer;
 }
 
+
 /**
  * ? when click the button disparar evento click and do the magic
  */
 
 submitEl.addEventListener('click', () => {
-    const answerValue = getSelectedRadio();
+    var answerValue = getSelectedRadio();
 
     if (answerValue !== undefined) { 
         if (answerValue === data[current_question].correct) {
@@ -115,10 +114,13 @@ submitEl.addEventListener('click', () => {
         current_question++;
         if (current_question < data.length) { 
             loadQuiz();
+            deselect();
         } else {
             quiz.innerHTML = score;
         }
     } 
+
+    
 });
 
 
