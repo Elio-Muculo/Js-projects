@@ -62,6 +62,12 @@ button:hover {
     cursor: pointer;
 }
 
+.quiz {
+    background-image: url('./trophy.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
 
 
 

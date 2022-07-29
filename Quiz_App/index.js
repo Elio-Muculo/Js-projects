@@ -52,7 +52,9 @@ const a_text = document.getElementById('a_text');
 const b_text = document.getElementById('b_text');
 const c_text = document.getElementById('c_text');
 const d_text = document.getElementById('d_text');
+const scoreEl = document.getElementById('score');
 const quiz = document.getElementById('quiz');
+const header = document.getElementById('header');
 
 
 let score = 0;
@@ -72,6 +74,20 @@ function loadQuiz() {
     c_text.innerHTML = dataQuiz[current_question].c;
     d_text.innerHTML = dataQuiz[current_question].d;
 }
+
+
+/**
+ * ? show the  result after finish the game in a fashion way
+ */
+function showResult() {
+    quiz.setAttribute('class', 'quiz');
+    header.style.visibility = 'hidden';
+    submitEl.innerHTML = `Well Done You Score ${score} / ${dataQuiz.length}`;
+    setTimeout(() => {
+        submitEl.setAttribute('onClick', `${location.reload()}`)
+    }, 5000);
+}
+
 
 
 /**
@@ -118,7 +134,7 @@ submitEl.addEventListener('click', () => {
             loadQuiz();
             deselect();
         } else {
-            quiz.innerHTML = score;
+            showResult();
         }
     } 
 });
