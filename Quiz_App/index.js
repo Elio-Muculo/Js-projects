@@ -1,6 +1,6 @@
 
 
-const data = [
+const dataQuiz = [
     {
         question: 'How old is florin pop',
         a: '10',
@@ -52,6 +52,8 @@ const a_text = document.getElementById('a_text');
 const b_text = document.getElementById('b_text');
 const c_text = document.getElementById('c_text');
 const d_text = document.getElementById('d_text');
+const quiz = document.getElementById('quiz');
+
 
 let score = 0;
 let current_question = 0;
@@ -64,16 +66,16 @@ loadQuiz();
  */
 function loadQuiz() {
     selectAnswer = undefined;
-    questionEl.innerHTML = data[current_question].question;
-    a_text.innerHTML = data[current_question].a;
-    b_text.innerHTML = data[current_question].b;
-    c_text.innerHTML = data[current_question].c;
-    d_text.innerHTML = data[current_question].d;
+    questionEl.innerHTML = dataQuiz[current_question].question;
+    a_text.innerHTML = dataQuiz[current_question].a;
+    b_text.innerHTML = dataQuiz[current_question].b;
+    c_text.innerHTML = dataQuiz[current_question].c;
+    d_text.innerHTML = dataQuiz[current_question].d;
 }
 
 
 /**
- * ? unselect the radio when data load of form
+ * ? unselect the radio when dataQuiz load of form
  */
 function deselect() {
     answers.forEach((answer) => {
@@ -107,21 +109,20 @@ submitEl.addEventListener('click', () => {
     var answerValue = getSelectedRadio();
 
     if (answerValue !== undefined) { 
-        if (answerValue === data[current_question].correct) {
+        if (answerValue === dataQuiz[current_question].correct) {
             ++score;
         }
         
         current_question++;
-        if (current_question < data.length) { 
+        if (current_question < dataQuiz.length) { 
             loadQuiz();
             deselect();
         } else {
             quiz.innerHTML = score;
         }
     } 
-
-    
 });
+
 
 
 
