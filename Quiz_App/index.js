@@ -88,6 +88,29 @@ function showResult() {
     }, 5000);
 }
 
+/**
+ * convert the answer selected to the correspondent element
+ * if select a == a_text the element
+ * 
+ * @param { string } answer - the answer selected returned by the getSelectedRadio()
+ * 
+ * @return { string } element that correspond to the answer select correct or not
+ */
+function getElement(answer) {
+    switch (answer) {
+        case 'a':
+            return a_text;
+        case 'b':
+            return b_text;
+        case 'c':
+            return c_text;
+        case 'd':
+            return d_text;
+        default:
+            return undefined;
+            break;
+    }
+}
 
 
 /**
@@ -118,24 +141,32 @@ function getSelectedRadio() {
 
 
 /**
- * ? when click the button disparar evento click and do the magic
+ * ? when click the button trigger the event click and do the magic
  */
 
 submitEl.addEventListener('click', () => {
+    // * @var answerValue - value of the selected radio | ex: 'd'
     var answerValue = getSelectedRadio();
+    const element = getElement(answerValue.toString());
 
     if (answerValue !== undefined) { 
         if (answerValue === dataQuiz[current_question].correct) {
+            element.style.color = 'green';
             ++score;
+        } else {
+            element.style.color = 'red';
         }
         
-        current_question++;
-        if (current_question < dataQuiz.length) { 
-            loadQuiz();
-            deselect();
-        } else {
-            showResult();
-        }
+        setTimeout(() => {
+            current_question++;
+            element.style.color = 'black';
+            if (current_question < dataQuiz.length) { 
+                loadQuiz();
+                deselect();
+            } else {
+                showResult();
+            }
+        }, 2000);
     } 
 });
 
