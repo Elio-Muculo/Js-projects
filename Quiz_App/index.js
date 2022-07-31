@@ -143,7 +143,6 @@ function getSelectedRadio() {
 /**
  * ? when click the button trigger the event click and do the magic
  */
-
 submitEl.addEventListener('click', () => {
     // * @var answerValue - value of the selected radio | ex: 'd'
     var answerValue = getSelectedRadio();
